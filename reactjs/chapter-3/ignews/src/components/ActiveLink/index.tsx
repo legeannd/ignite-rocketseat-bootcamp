@@ -22,3 +22,7 @@ export function ActiveLink({ children, activeClassName, ...rest }: ActiveLinkPro
     </Link>
   )
 }
+
+// A função cloneElement possibilita adicionar propriedades a elementos que vem dentro das children,
+// o que não é possível por padrão, visto que não é possível conhecer qual é o tipo de elemento que veio junto.
+// Nesse caso, a âncora que vem como children do ActiveLink recebe a propriedade className em todos os casos.
