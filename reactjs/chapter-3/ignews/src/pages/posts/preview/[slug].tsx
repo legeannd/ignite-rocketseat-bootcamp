@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { useSession } from "next-auth/client";
 import Head from "next/head";
 import Link from "next/link";
@@ -55,7 +55,11 @@ export default function PostPreview({ post }: PostPreviewProps) {
   );
 }
 
-export const getStaticPaths = () => {
+
+// Responsável por gerenciar quais páginas serão geradas estaticamente.
+// Só é possível utilizar essa funcionalidade em páginas que possuem parâmetros de url dinâmicos.
+
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
     fallback: 'blocking'
@@ -83,6 +87,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return { 
     props: {
       post,
-    }
+    },
+    revalidate: 60 * 30, // 30 minutes
   }
 }
